@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin • CYBER ONLINE</title>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07070a;--card:#0e0e12;--field:#120709;--line:#2a1216;--line2:#3a1519;--red:#dc2626;--red2:#ff3b3b;--tx:#f4f4f5;--mu:#a1a1aa}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+body{background:radial-gradient(700px 420px at 50% -60px,#7f1d1d66,transparent),radial-gradient(500px 400px at 100% 40%,#450a0a55,transparent),var(--bg);background-attachment:fixed;color:var(--tx);font:15px/1.5 Inter,system-ui,sans-serif;min-height:100vh;padding:18px 14px 60px}
+.wrap{max-width:720px;margin:auto}
+.head{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line2);border-radius:20px;background:#120709ee;margin-bottom:20px}
+.logo{width:44px;height:44px;border-radius:14px;background:radial-gradient(circle,#7f1d1d,#1a0507);border:2px solid #4a1015;display:grid;place-items:center;font:700 17px 'Chakra Petch';font-style:italic;flex:none}
+.head h1{font:700 20px 'Chakra Petch';text-transform:uppercase;letter-spacing:.5px;line-height:1.1}
+.head small{color:var(--red2);font-size:12px;letter-spacing:2px;font-weight:600}
+h2{font:700 13px Inter;letter-spacing:3px;text-transform:uppercase;color:var(--red2);margin:26px 4px 10px;display:flex;align-items:center;gap:10px}
+h2:after{content:'';height:1px;flex:1;background:linear-gradient(90deg,#5b1a20,transparent)}
+.c{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:12px}
+label{display:block;font-size:12px;font-weight:600;color:var(--mu);margin:0 2px 5px;letter-spacing:.3px}
+input,textarea,select{width:100%;background:var(--field);border:1px solid var(--line2);color:var(--tx);border-radius:12px;padding:12px;margin-bottom:14px;font:inherit;outline:none;transition:border-color .15s,box-shadow .15s}
+input:focus,textarea:focus,select:focus{border-color:var(--red);box-shadow:0 0 0 3px #dc262633}
+input::placeholder,textarea::placeholder{color:#5f5f68}
+textarea{resize:vertical}
+select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,#ef4444 50%),linear-gradient(135deg,#ef4444 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 14px) 50%;background-size:6px 6px;background-repeat:no-repeat;padding-right:36px}
+button{font-family:inherit;cursor:pointer;border:0;border-radius:12px;padding:12px 16px;font-weight:700;font-size:14px;color:#fff;background:linear-gradient(#e11d1d,#b80f0f);box-shadow:0 6px 18px #dc262644;transition:transform .1s,filter .15s}
+button:hover{filter:brightness(1.1)}button:active{transform:scale(.97)}
+button.r{background:#1a0709;border:1px solid #4a1015;color:#ef4444;box-shadow:none}
+button.g{background:#1c1012;border:1px solid var(--line2);box-shadow:none}
+.full{width:100%}
+.row{display:flex;gap:10px}.row>*{flex:1;min-width:0}
+.row.btns{flex-wrap:wrap}.row.btns>button{flex:1 1 120px}
+.s{color:var(--mu);font-size:13px}
+.plan .top{display:grid;grid-template-columns:2fr 1fr;gap:10px}
+.stock{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border:1px solid #5b1a20;border-radius:30px;background:#2a0b0f;color:#ef4444;font-size:12px;font-weight:600;margin:0 0 14px}
+.stock b{color:#fff}
+.ord{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.ord b{display:block}
+.amt{font:700 17px Inter;color:var(--red2);white-space:nowrap}
+.tag{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:600;background:#2a0b0f;border:1px solid #5b1a20;color:#ef4444;margin-right:4px}
+.tag.paid{background:#06281a;border-color:#0f5a3a;color:#34d399}
+#lg{max-width:380px;margin:12vh auto 0;text-align:center}
+#lg h2{justify-content:center}#lg h2:after{display:none}
+</style></head><body>
+<div class="wrap">
+<div class="head"><div class="logo">CO</div><div><h1>Painel Admin</h1><small>CYBER ONLINE</small></div></div>
+
+<div id="lg" style="display:none" class="c">
+  <h2>Acesso restrito</h2>
+  <input id="pw" type="password" placeholder="Senha do admin">
+  <button class="full" onclick="login()">Entrar</button>
+  <p id="le" class="s" style="margin-top:10px;color:#ef4444"></p>
+</div>
+
+<div id="app" style="display:none">
+<h2>Loja</h2>
+<div class="c">
+  <label for="name">Nome do produto</label><input id="name">
+  <label for="desc">Descrição</label><textarea id="desc" rows="2"></textarea>
+  <label for="image">Link da foto do produto</label><input id="image" placeholder="https://...">
+  <label for="whatsapp">WhatsApp do suporte (com DDD, só números)</label><input id="whatsapp" placeholder="5593999999999">
+  <label for="apk">Link do APK (liberado só após pagamento)</label><input id="apk" placeholder="https://...">
+  <label for="soldout">Status do produto</label>
+  <select id="soldout"><option value="false">Disponível</option><option value="true">Esgotado / em atualização</option></select>
+  <button class="full" onclick="saveS()">Salvar loja</button>
+</div>
+
+<h2>Planos e keys</h2>
+<div id="plans"></div>
+<div class="c">
+  <label>Novo plano</label>
+  <div class="row"><input id="np" placeholder="Nome (ex: Diário 24h)"><input id="npr" type="number" step="0.01" placeholder="Preço"></div>
+  <button class="full" onclick="addP()">Criar plano</button>
+</div>
+
+<h2>Últimas vendas</h2>
+<div id="ord"></div>
+</div>
+</div>
+<script>
+let P = sessionStorage.p || '', D;
+const $ = i => document.getElementById(i);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+async function A(p, m = 'GET', b) {
+  const r = await fetch('/api/admin/' + p, { method: m, headers: { 'Content-Type': 'application/json', 'x-admin': P }, body: b && JSON.stringify(b) });
+  const j = await r.json(); if (!r.ok) throw new Error(j.error || 'Erro'); return j;
+}
+function login() { P = $('pw').value; sessionStorage.p = P; load(); }
+async function load() {
+  try { D = await A('data'); } catch (e) { $('lg').style.display = 'block'; $('app').style.display = 'none'; $('le').textContent = P ? 'Não entrou: ' + e.message : ''; return; }
+  $('lg').style.display = 'none'; $('app').style.display = 'block';
+  ['name', 'desc', 'image', 'whatsapp', 'apk'].forEach(k => $(k).value = D.s[k] ?? '');
+  $('soldout').value = String(D.s.soldout === true || D.s.soldout === 'true' || D.s.soldout === 1 || D.s.soldout === '1');
+  $('plans').innerHTML = D.plans.map(p => `<div class="c plan"><div class="top"><div><label for="n${p.id}">Nome</label><input id="n${p.id}" value="${esc(p.name)}"></div><div><label for="p${p.id}">Preço (R$)</label><input id="p${p.id}" type="number" step="0.01" value="${p.price}"></div></div>
+    <div class="stock">Keys disponíveis: <b>${p.stock}</b></div>
+    <label for="k${p.id}">Adicionar keys</label>
+    <textarea id="k${p.id}" rows="3" placeholder="Cole as keys, uma por linha"></textarea>
+    <div class="row btns"><button onclick="addK(${p.id})">Adicionar keys</button><button class="g" onclick="savP(${p.id})">Salvar plano</button><button class="r" onclick="delP(${p.id})">Excluir</button></div></div>`).join('');
+  $('ord').innerHTML = D.orders.map(o => `<div class="c ord"><div><b>${esc(o.plan_name)}</b><div class="s">${esc(o.email)}</div><div class="s"><span class="tag ${o.status === 'paid' ? 'paid' : ''}">${esc(o.status)}</span>${new Date(o.created_at).toLocaleString('pt-BR')}</div></div><div class="amt">R$ ${o.amount}</div></div>`).join('') || '<p class="s" style="padding:0 4px">Sem vendas ainda.</p>';
+}
+const done = m => { alert(m); load(); };
+const safe = f => async (...a) => { try { await f(...a); } catch (e) { alert('Erro: ' + e.message); } };
+const saveS = safe(async () => { const b = {}; ['name', 'desc', 'image', 'whatsapp', 'apk', 'soldout'].forEach(k => b[k] = $(k).value); await A('settings', 'POST', b); done('Loja salva!'); });
+const addP = safe(async () => { await A('plan', 'POST', { name: $('np').value, price: $('npr').value }); $('np').value = $('npr').value = ''; done('Plano criado!'); });
+const savP = safe(async id => { await A('plan', 'POST', { id, name: $('n' + id).value, price: $('p' + id).value }); done('Plano salvo!'); });
+const delP = safe(async id => { if (confirm('Excluir plano e keys não usadas?')) { await A('plan/' + id, 'DELETE'); done('Plano excluído!'); } });
+const addK = safe(async id => { const j = await A('keys', 'POST', { plan_id: id, keys: $('k' + id).value }); done(j.added != null ? j.added + ' keys adicionadas!' : 'Keys enviadas!'); });
+if (P) load(); else $('lg').style.display = 'block';
+</script></body></html>
